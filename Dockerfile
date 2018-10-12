@@ -7,6 +7,7 @@ COPY . /opt/CTFd
 WORKDIR /opt/CTFd
 VOLUME ["/opt/CTFd"]
 
+RUN python -c "import os; f=open('.ctfd_secret_key', 'a+'); f.write(os.urandom(64)); f.close()"
 RUN pip install -r requirements.txt
 RUN for d in CTFd/plugins/*; do \
       if [ -f "$d/requirements.txt" ]; then \
